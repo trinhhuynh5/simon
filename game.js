@@ -5,7 +5,7 @@ var started = false;
 var level = 0;
 
 /* Start game on a keydown by calling nextSquence()*/
-$(document).keydown(function(){
+$(document).click(function(){
     if(!started){
         // $("#level-title").text("Level " + level);
         nextSquence();
@@ -31,18 +31,19 @@ function checkAnswer(i){
         if(userPattern.length === gamePattern.length){
             setTimeout(function(){
                 nextSquence();
-            }, 1000);
+            }, 300);
         }
     } else {
         // If any button press is wrong, display game over and refresh game.
         playSound("wrong");
         $("body").addClass("game-over");
-        $("#level-title").text("Game Over, Press Any Key to Play Again");
+        $("#level-title").text("Game Over, Click Anywhere to Play Again");
         setTimeout(function(){
             $("body").removeClass("game-over");
         }, 200);
-
-        startOver();
+        setTimeout(function(){
+            startOver();
+        }, 200);
     }
 }
 
@@ -61,8 +62,11 @@ function nextSquence(){
     gamePattern.push(randomChosenColor);
 
     // Animate the randomly chosen button with a flash and a sound
-    playSound(randomChosenColor);
-    $("#"+randomChosenColor).fadeIn(100).fadeOut(100).fadeIn(100);
+    setTimeout(function(){
+        playSound(randomChosenColor);
+        $("#"+randomChosenColor).fadeIn(100).fadeOut(100).fadeIn(100);
+    }, 400);
+
 }
 
 /* Animate the button pressed based on color */
