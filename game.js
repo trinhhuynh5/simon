@@ -18,8 +18,8 @@ $(".btn").click(function(){
     if(started){
         var userChosenColor = $(this).attr("id");
         userPattern.push(userChosenColor);
-        animateBtnPress(userChosenColor);
         playSound(userChosenColor);
+        animateBtnPress(userChosenColor);
         checkAnswer(userPattern.length-1);
     }
 });
@@ -35,14 +35,16 @@ function checkAnswer(i){
         }
     } else {
         // If any button press is wrong, display game over and refresh game.
-        playSound("wrong");
-        $("body").addClass("game-over");
-        $("#level-title").text("Game Over, Click Anywhere to Play Again");
         setTimeout(function(){
-            $("body").removeClass("game-over");
-        }, 200);
-        setTimeout(function(){
-            startOver();
+            playSound("wrong");
+            $("body").addClass("game-over");
+            $("#level-title").text("Game Over, Click Anywhere to Play Again");
+            setTimeout(function(){
+                $("body").removeClass("game-over");
+            }, 200);
+            setTimeout(function(){
+                startOver();
+            }, 200);
         }, 200);
     }
 }
